@@ -329,14 +329,14 @@
     }
 
     .transcript-area {
-      min-height: 300px;
+      min-height: 280px;
       background: var(--bg-tertiary);
       border-radius: 12px;
       padding: 20px;
       font-family: "IBM Plex Mono", monospace;
       font-size: 13px;
       line-height: 1.8;
-      max-height: 400px;
+      max-height: 350px;
       overflow-y: auto;
     }
 
@@ -373,16 +373,57 @@
     .transcript-highlight.budget { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
     .transcript-highlight.intent { background: rgba(0,149,255,0.2); color: var(--accent-blue); }
 
+    /* Filter Bar - NEW */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      padding: 6px 14px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--accent-primary);
+      color: var(--text-primary);
+    }
+
+    .filter-chip.active {
+      background: rgba(0,214,143,0.15);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .filter-chip .count {
+      background: var(--bg-card);
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
     /* Lead Score Display */
     .score-display {
       text-align: center;
-      padding: 30px;
+      padding: 24px;
     }
 
     .score-ring {
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 20px;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
       position: relative;
     }
 
@@ -419,22 +460,22 @@
     }
 
     .score-number {
-      font-size: 48px;
+      font-size: 42px;
       font-weight: 700;
       font-family: "IBM Plex Mono", monospace;
     }
 
     .score-label {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .score-category {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .score-category.hot { color: var(--accent-primary); }
@@ -442,34 +483,98 @@
     .score-category.cold { color: var(--accent-blue); }
 
     .score-reason {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.5;
     }
 
+    /* Confidence Meter - NEW */
+    .confidence-section {
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+    }
+
+    .confidence-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .confidence-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .confidence-value {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+
+    .confidence-bar {
+      height: 6px;
+      background: var(--bg-card);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-blue));
+      border-radius: 3px;
+      transition: width 0.8s ease;
+    }
+
+    .confidence-factors {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .confidence-factor {
+      font-size: 10px;
+      padding: 4px 10px;
+      background: var(--bg-card);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    .confidence-factor.high { border-left: 2px solid var(--accent-primary); }
+    .confidence-factor.medium { border-left: 2px solid var(--accent-amber); }
+    .confidence-factor.low { border-left: 2px solid var(--accent-red); }
+
     /* Signal List */
     .signals-list {
-      margin-top: 24px;
+      margin-top: 16px;
+      max-height: 200px;
+      overflow-y: auto;
     }
 
     .signal-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px;
+      gap: 10px;
+      padding: 10px;
       background: var(--bg-tertiary);
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
     }
 
     .signal-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .signal-icon.positive { background: rgba(0,214,143,0.2); }
@@ -481,24 +586,119 @@
     }
 
     .signal-name {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       margin-bottom: 2px;
     }
 
     .signal-detail {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-secondary);
     }
 
     .signal-weight {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
     }
 
     .signal-weight.positive { color: var(--accent-primary); }
     .signal-weight.negative { color: var(--accent-red); }
+
+    /* Ranked Leads Table - NEW */
+    .ranked-leads-section {
+      margin-top: 24px;
+    }
+
+    .ranked-leads-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .ranked-leads-table {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .ranked-lead-row {
+      display: grid;
+      grid-template-columns: 50px 2fr 1fr 1fr 1fr 80px;
+      gap: 12px;
+      padding: 12px 16px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .ranked-lead-row:last-child {
+      border-bottom: none;
+    }
+
+    .ranked-lead-row.header {
+      background: var(--bg-tertiary);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .lead-rank {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+    }
+
+    .lead-rank.hot { color: var(--accent-primary); }
+    .lead-rank.warm { color: var(--accent-amber); }
+    .lead-rank.cold { color: var(--accent-blue); }
+
+    .lead-score-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .lead-score-badge.hot {
+      background: rgba(0,214,143,0.15);
+      color: var(--accent-primary);
+    }
+
+    .lead-score-badge.warm {
+      background: rgba(245,158,11,0.15);
+      color: var(--accent-amber);
+    }
+
+    .lead-score-badge.cold {
+      background: rgba(0,149,255,0.15);
+      color: var(--accent-blue);
+    }
+
+    .lead-signals {
+      display: flex;
+      gap: 4px;
+    }
+
+    .lead-signal-tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+    }
 
     /* ====================
        QUOTE GENERATOR STYLES
@@ -512,14 +712,14 @@
     .extraction-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .extraction-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      padding: 14px;
+      padding: 12px;
       background: var(--bg-tertiary);
       border-radius: 10px;
       border-left: 3px solid var(--border);
@@ -532,14 +732,14 @@
     }
 
     .extraction-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       background: var(--bg-card);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .extraction-content {
@@ -547,15 +747,15 @@
     }
 
     .extraction-label {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .extraction-value {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--text-primary);
     }
@@ -568,9 +768,47 @@
 
     .extraction-confidence {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--accent-primary);
-      margin-top: 4px;
+      margin-top: 3px;
+    }
+
+    /* Editable Input - NEW */
+    .extraction-input {
+      width: 100%;
+      padding: 8px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .extraction-item.editing .extraction-input {
+      display: block;
+    }
+
+    .extraction-item.editing .extraction-value {
+      display: none;
+    }
+
+    .edit-btn {
+      padding: 4px 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .edit-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
     }
 
     /* Quote Preview */
@@ -581,55 +819,56 @@
     }
 
     .quote-header {
-      padding: 20px;
+      padding: 18px;
       background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
       color: var(--bg-primary);
     }
 
     .quote-company {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
     .quote-number {
-      font-size: 12px;
+      font-size: 11px;
       opacity: 0.8;
       font-family: "IBM Plex Mono", monospace;
     }
 
     .quote-body {
-      padding: 20px;
+      padding: 18px;
     }
 
     .quote-customer {
-      margin-bottom: 20px;
-      padding-bottom: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
 
     .quote-customer-label {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .quote-customer-name {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
     }
 
     .quote-line-items {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .quote-line {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
+      padding: 8px 0;
       border-bottom: 1px dashed var(--border);
+      font-size: 12px;
     }
 
     .quote-line:last-child {
@@ -637,7 +876,6 @@
     }
 
     .quote-line-desc {
-      font-size: 13px;
       color: var(--text-secondary);
     }
 
@@ -649,22 +887,133 @@
     .quote-total {
       display: flex;
       justify-content: space-between;
-      padding: 16px;
+      padding: 14px;
       background: var(--bg-card);
       border-radius: 8px;
-      margin-top: 16px;
     }
 
     .quote-total-label {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
     .quote-total-value {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--accent-primary);
       font-family: "IBM Plex Mono", monospace;
+    }
+
+    /* Follow-up Section - NEW */
+    .followup-section {
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      border: 1px dashed var(--border);
+    }
+
+    .followup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .followup-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-amber);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .followup-toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      background: var(--bg-tertiary);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .followup-toggle.active {
+      background: var(--accent-primary);
+    }
+
+    .followup-toggle::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s;
+    }
+
+    .followup-toggle.active::after {
+      left: 20px;
+    }
+
+    .followup-options {
+      display: none;
+    }
+
+    .followup-options.visible {
+      display: block;
+    }
+
+    .followup-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .followup-option input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-primary);
+    }
+
+    /* Preview Actions - NEW */
+    .preview-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .preview-btn {
+      flex: 1;
+      padding: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .preview-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
     }
 
     /* ====================
@@ -680,6 +1029,65 @@
       grid-column: 1 / -1;
     }
 
+    /* Alert Banner - NEW */
+    .alert-banner {
+      display: none;
+      padding: 14px 18px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      animation: slideDown 0.4s ease;
+    }
+
+    .alert-banner.visible {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(239,68,68,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .alert-content {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: 2px;
+    }
+
+    .alert-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .alert-close {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 6px;
+      color: var(--accent-red);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
     /* Lost Leads Table */
     .leads-table {
       width: 100%;
@@ -687,7 +1095,7 @@
 
     .leads-table-header {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
       gap: 12px;
       padding: 12px 16px;
       background: var(--bg-tertiary);
@@ -702,9 +1110,9 @@
 
     .leads-table-row {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
       gap: 12px;
-      padding: 14px 16px;
+      padding: 12px 16px;
       background: var(--bg-tertiary);
       border-radius: 8px;
       margin-bottom: 6px;
@@ -744,7 +1152,7 @@
     }
 
     .sentiment-bar {
-      width: 60px;
+      width: 50px;
       height: 6px;
       background: var(--bg-card);
       border-radius: 3px;
@@ -768,6 +1176,38 @@
       color: var(--accent-red);
       border-radius: 4px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reason-tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .reason-tooltip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+
+    .reason-tooltip:hover::after {
+      opacity: 1;
+      bottom: calc(100% + 8px);
     }
 
     /* Pattern Cards */
@@ -775,12 +1215,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
+      margin-bottom: 24px;
     }
 
     .pattern-card {
       background: var(--bg-tertiary);
       border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
       border: 1px solid var(--border);
       transition: all 0.3s;
     }
@@ -790,23 +1231,46 @@
       transform: translateY(-2px);
     }
 
+    .pattern-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
     .pattern-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      margin-bottom: 14px;
+      font-size: 20px;
     }
 
     .pattern-icon.red { background: rgba(239,68,68,0.15); }
     .pattern-icon.amber { background: rgba(245,158,11,0.15); }
     .pattern-icon.blue { background: rgba(0,149,255,0.15); }
 
+    .pattern-trend {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .pattern-trend.up {
+      background: rgba(239,68,68,0.15);
+      color: var(--accent-red);
+    }
+
+    .pattern-trend.down {
+      background: rgba(0,214,143,0.15);
+      color: var(--accent-primary);
+    }
+
     .pattern-title {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
       margin-bottom: 6px;
     }
@@ -815,7 +1279,7 @@
       font-size: 28px;
       font-weight: 700;
       font-family: "IBM Plex Mono", monospace;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .pattern-stat.red { color: var(--accent-red); }
@@ -823,33 +1287,138 @@
     .pattern-stat.blue { color: var(--accent-blue); }
 
     .pattern-desc {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-secondary);
       line-height: 1.5;
+      margin-bottom: 12px;
     }
+
+    /* Actionable Suggestion - NEW */
+    .pattern-action {
+      padding: 10px;
+      background: var(--bg-card);
+      border-radius: 6px;
+      border-left: 2px solid var(--accent-primary);
+    }
+
+    .action-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+    }
+
+    .action-text {
+      font-size: 11px;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    /* Trends Chart - NEW */
+    .trends-section {
+      margin-bottom: 24px;
+    }
+
+    .trends-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .trends-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .trends-period {
+      display: flex;
+      gap: 6px;
+    }
+
+    .period-btn {
+      padding: 5px 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .period-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: var(--bg-primary);
+    }
+
+    .trends-chart {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .chart-container {
+      height: 200px;
+      position: relative;
+    }
+
+    .chart-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 14px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.conversion { background: var(--accent-primary); }
+    .legend-dot.lost { background: var(--accent-red); }
 
     /* Analysis Panel */
     .analysis-panel {
       background: var(--bg-tertiary);
       border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
+      padding: 18px;
     }
 
     .analysis-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .analysis-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
     .analysis-content {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.7;
     }
@@ -860,7 +1429,7 @@
     }
 
     .analysis-recommendation {
-      margin-top: 16px;
+      margin-top: 14px;
       padding: 14px;
       background: rgba(0,214,143,0.1);
       border: 1px solid rgba(0,214,143,0.2);
@@ -877,20 +1446,9 @@
     }
 
     .rec-text {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-primary);
       line-height: 1.5;
-    }
-
-    /* Chart Container */
-    .chart-container {
-      height: 200px;
-      position: relative;
-    }
-
-    .chart-canvas {
-      width: 100%;
-      height: 100%;
     }
 
     /* Controls */
@@ -899,7 +1457,7 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 24px;
-      padding: 20px;
+      padding: 18px;
       background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -907,11 +1465,11 @@
 
     .control-group {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn {
-      padding: 12px 24px;
+      padding: 11px 22px;
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -951,7 +1509,7 @@
 
     /* Sample Selector */
     .samples-section {
-      margin-top: 32px;
+      margin-top: 28px;
     }
 
     .samples-label {
@@ -959,21 +1517,21 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--text-secondary);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
     .samples-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
 
     .sample-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -993,11 +1551,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .sample-name {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
@@ -1040,6 +1598,98 @@
       font-weight: 600;
     }
 
+    /* Modal - NEW */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.visible {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-tertiary);
+      border: none;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-actions {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Export Preview */
+    .export-preview {
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .export-row {
+      display: flex;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .export-row:last-child {
+      border-bottom: none;
+    }
+
+    .export-cell {
+      flex: 1;
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
       .lead-scorer-grid,
@@ -1052,6 +1702,13 @@
       }
       .samples-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .ranked-lead-row {
+        grid-template-columns: 40px 1fr 1fr 80px;
+      }
+      .ranked-lead-row .lead-signals,
+      .ranked-lead-row.header span:nth-child(5) {
+        display: none;
       }
     }
 
@@ -1126,6 +1783,17 @@
         <p class="demo-subtitle">Automatically analyze call transcripts to identify buying signals, urgency indicators, and budget mentions for smarter lead prioritization.</p>
       </div>
 
+      <!-- Filter Bar - NEW -->
+      <div class="filter-bar" id="filter-bar">
+        <div class="filter-chip active" onclick="filterLeads('all', this)">All Leads <span class="count">4</span></div>
+        <div class="filter-chip" onclick="filterLeads('urgency', this)">🔥 Urgency <span class="count">2</span></div>
+        <div class="filter-chip" onclick="filterLeads('budget', this)">💰 Budget <span class="count">2</span></div>
+        <div class="filter-chip" onclick="filterLeads('intent', this)">🎯 High Intent <span class="count">3</span></div>
+        <div class="filter-chip" onclick="filterLeads('hot', this)">🟢 Hot <span class="count">2</span></div>
+        <div class="filter-chip" onclick="filterLeads('warm', this)">🟡 Warm <span class="count">1</span></div>
+        <div class="filter-chip" onclick="filterLeads('cold', this)">🔵 Cold <span class="count">1</span></div>
+      </div>
+
       <div class="lead-scorer-grid">
         <div class="card">
           <div class="card-header">
@@ -1163,6 +1831,20 @@
               <div class="score-reason" id="score-reason">Run analysis to see lead score</div>
             </div>
 
+            <!-- Confidence Section - NEW -->
+            <div class="confidence-section" id="confidence-section" style="display: none;">
+              <div class="confidence-header">
+                <span class="confidence-label">Model Confidence</span>
+                <span class="confidence-value" id="confidence-value">--</span>
+              </div>
+              <div class="confidence-bar">
+                <div class="confidence-fill" id="confidence-fill" style="width: 0%"></div>
+              </div>
+              <div class="confidence-factors" id="confidence-factors">
+                <!-- Factors will be populated -->
+              </div>
+            </div>
+
             <div class="signals-list" id="signals-list">
               <!-- Signals will be populated -->
             </div>
@@ -1170,9 +1852,28 @@
         </div>
       </div>
 
+      <!-- Ranked Leads Table - NEW -->
+      <div class="ranked-leads-section" id="ranked-leads-section" style="display: none;">
+        <div class="ranked-leads-header">
+          <span class="section-title">Ranked Leads Queue</span>
+          <button class="btn" onclick="exportLeadsCSV()">📥 Export to CSV</button>
+        </div>
+        <div class="ranked-leads-table" id="ranked-leads-table">
+          <div class="ranked-lead-row header">
+            <span>#</span>
+            <span>Lead Name</span>
+            <span>Service</span>
+            <span>Score</span>
+            <span>Key Signals</span>
+            <span>Action</span>
+          </div>
+          <!-- Rows will be populated -->
+        </div>
+      </div>
+
       <div class="samples-section">
         <div class="samples-label">Sample Conversations</div>
-        <div class="samples-grid">
+        <div class="samples-grid" id="leads-sample-grid">
           <div class="sample-card selected" onclick="selectLeadSample(0, this)">
             <div class="sample-header">
               <span class="sample-name">Hot Lead - Solar</span>
@@ -1219,10 +1920,11 @@
       <div class="controls">
         <div class="control-group">
           <button class="btn" onclick="randomLeadSample()">🔀 Random Call</button>
+          <button class="btn" onclick="analyzeAllLeads()">📊 Analyze All</button>
         </div>
         <div class="control-group">
           <button class="btn primary" id="analyze-lead-btn" onclick="analyzeLeadScore()">⚡ Analyze Lead</button>
-          <button class="btn" id="export-lead-btn" disabled>💾 Export Score</button>
+          <button class="btn" id="export-lead-btn" onclick="showExportModal('lead')" disabled>💾 Export Score</button>
         </div>
       </div>
     </div>
@@ -1253,41 +1955,75 @@
                 <div class="extraction-content">
                   <div class="extraction-label">Service Type</div>
                   <div class="extraction-value pending" id="ext-service-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-service-input">
                 </div>
+                <button class="edit-btn" onclick="toggleEdit('service')">✏️</button>
               </div>
               <div class="extraction-item" id="ext-location">
                 <div class="extraction-icon">📍</div>
                 <div class="extraction-content">
                   <div class="extraction-label">Location</div>
                   <div class="extraction-value pending" id="ext-location-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-location-input">
                 </div>
+                <button class="edit-btn" onclick="toggleEdit('location')">✏️</button>
               </div>
               <div class="extraction-item" id="ext-size">
                 <div class="extraction-icon">📐</div>
                 <div class="extraction-content">
                   <div class="extraction-label">Project Size</div>
                   <div class="extraction-value pending" id="ext-size-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-size-input">
                 </div>
+                <button class="edit-btn" onclick="toggleEdit('size')">✏️</button>
               </div>
               <div class="extraction-item" id="ext-timeline">
                 <div class="extraction-icon">📅</div>
                 <div class="extraction-content">
                   <div class="extraction-label">Timeline</div>
                   <div class="extraction-value pending" id="ext-timeline-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-timeline-input">
                 </div>
+                <button class="edit-btn" onclick="toggleEdit('timeline')">✏️</button>
               </div>
               <div class="extraction-item" id="ext-customer">
                 <div class="extraction-icon">👤</div>
                 <div class="extraction-content">
                   <div class="extraction-label">Customer Name</div>
                   <div class="extraction-value pending" id="ext-customer-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-customer-input">
                 </div>
+                <button class="edit-btn" onclick="toggleEdit('customer')">✏️</button>
               </div>
               <div class="extraction-item" id="ext-requirements">
                 <div class="extraction-icon">📋</div>
                 <div class="extraction-content">
                   <div class="extraction-label">Special Requirements</div>
                   <div class="extraction-value pending" id="ext-requirements-value">Awaiting analysis...</div>
+                  <input type="text" class="extraction-input" id="ext-requirements-input">
+                </div>
+                <button class="edit-btn" onclick="toggleEdit('requirements')">✏️</button>
+              </div>
+            </div>
+
+            <!-- Follow-up Section - NEW -->
+            <div class="followup-section">
+              <div class="followup-header">
+                <span class="followup-title">⏰ Auto Follow-up</span>
+                <div class="followup-toggle" id="followup-toggle" onclick="toggleFollowup()"></div>
+              </div>
+              <div class="followup-options" id="followup-options">
+                <div class="followup-option">
+                  <input type="checkbox" id="followup-24h" checked>
+                  <label for="followup-24h">Reminder if no reply in 24 hours</label>
+                </div>
+                <div class="followup-option">
+                  <input type="checkbox" id="followup-48h">
+                  <label for="followup-48h">Second reminder at 48 hours</label>
+                </div>
+                <div class="followup-option">
+                  <input type="checkbox" id="followup-call">
+                  <label for="followup-call">Schedule callback at 72 hours</label>
                 </div>
               </div>
             </div>
@@ -1318,6 +2054,12 @@
                 <div class="quote-total">
                   <span class="quote-total-label">Total Estimate</span>
                   <span class="quote-total-value" id="quote-total">$---</span>
+                </div>
+
+                <!-- Preview Actions - NEW -->
+                <div class="preview-actions">
+                  <button class="preview-btn" onclick="previewAsPDF()">📄 Preview PDF</button>
+                  <button class="preview-btn" onclick="previewAsEmail()">✉️ Preview Email</button>
                 </div>
               </div>
             </div>
@@ -1374,10 +2116,11 @@
       <div class="controls">
         <div class="control-group">
           <button class="btn" onclick="randomQuoteSample()">🔀 Random Job</button>
+          <button class="btn" id="confirm-edits-btn" onclick="confirmEdits()" style="display: none;">✓ Confirm Edits</button>
         </div>
         <div class="control-group">
           <button class="btn primary" id="generate-quote-btn" onclick="generateQuote()">⚡ Generate Quote</button>
-          <button class="btn" id="export-quote-btn" disabled>📄 Export PDF</button>
+          <button class="btn" id="export-quote-btn" onclick="exportQuotePDF()" disabled>📄 Export PDF</button>
         </div>
       </div>
     </div>
@@ -1390,6 +2133,43 @@
         <div class="demo-badge">🔍 Pattern Recognition</div>
         <h1 class="demo-title">Missed <span class="highlight">Opportunity Detector</span></h1>
         <p class="demo-subtitle">Analyze historical call data to identify patterns in lost leads and uncover actionable insights to improve conversion rates.</p>
+      </div>
+
+      <!-- Alert Banner - NEW -->
+      <div class="alert-banner" id="alert-banner">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-content">
+          <div class="alert-title">Spike Detected: Response Time Issues</div>
+          <div class="alert-desc">37% increase in leads lost due to slow response in the last 24 hours</div>
+        </div>
+        <button class="alert-close" onclick="dismissAlert()">Dismiss</button>
+      </div>
+
+      <!-- Trends Chart - NEW -->
+      <div class="trends-section">
+        <div class="trends-header">
+          <span class="trends-title">Conversion Rate Trends</span>
+          <div class="trends-period">
+            <button class="period-btn" onclick="setPeriod('7d', this)">7D</button>
+            <button class="period-btn active" onclick="setPeriod('30d', this)">30D</button>
+            <button class="period-btn" onclick="setPeriod('90d', this)">90D</button>
+          </div>
+        </div>
+        <div class="trends-chart">
+          <div class="chart-container">
+            <canvas id="trends-canvas" class="chart-canvas"></canvas>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-dot conversion"></span>
+              Conversion Rate
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot lost"></span>
+              Lost Lead Rate
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="card" style="margin-bottom: 24px;">
@@ -1418,22 +2198,43 @@
 
       <div class="pattern-cards" id="pattern-cards">
         <div class="pattern-card">
-          <div class="pattern-icon red">⏱️</div>
+          <div class="pattern-header">
+            <div class="pattern-icon red">⏱️</div>
+            <span class="pattern-trend up" id="trend-response">↑ 12%</span>
+          </div>
           <div class="pattern-title">Response Time Issue</div>
           <div class="pattern-stat red" id="pattern-response">--</div>
-          <div class="pattern-desc">Leads that dropped due to slow follow-up (>4 hours)</div>
+          <div class="pattern-desc">Leads dropped due to slow follow-up (>4 hours)</div>
+          <div class="pattern-action">
+            <div class="action-label">💡 Suggested Action</div>
+            <div class="action-text">Implement auto-response within 15 min to capture high-intent leads</div>
+          </div>
         </div>
         <div class="pattern-card">
-          <div class="pattern-icon amber">💰</div>
+          <div class="pattern-header">
+            <div class="pattern-icon amber">💰</div>
+            <span class="pattern-trend down" id="trend-price">↓ 5%</span>
+          </div>
           <div class="pattern-title">Price Objection</div>
           <div class="pattern-stat amber" id="pattern-price">--</div>
           <div class="pattern-desc">Leads lost at the pricing discussion stage</div>
+          <div class="pattern-action">
+            <div class="action-label">💡 Suggested Action</div>
+            <div class="action-text">Offer financing options early in conversation to reduce sticker shock</div>
+          </div>
         </div>
         <div class="pattern-card">
-          <div class="pattern-icon blue">❓</div>
+          <div class="pattern-header">
+            <div class="pattern-icon blue">❓</div>
+            <span class="pattern-trend up" id="trend-questions">↑ 8%</span>
+          </div>
           <div class="pattern-title">Unanswered Questions</div>
           <div class="pattern-stat blue" id="pattern-questions">--</div>
           <div class="pattern-desc">Leads with unresolved concerns or questions</div>
+          <div class="pattern-action">
+            <div class="action-label">💡 Suggested Action</div>
+            <div class="action-text">Add FAQ bot to handle common questions 24/7</div>
+          </div>
         </div>
       </div>
 
@@ -1445,7 +2246,7 @@
           <!-- Analysis content will be populated -->
         </div>
         <div class="analysis-recommendation">
-          <div class="rec-label">💡 Recommendation</div>
+          <div class="rec-label">💡 Priority Recommendation</div>
           <div class="rec-text" id="rec-text">
             <!-- Recommendation will be populated -->
           </div>
@@ -1455,14 +2256,34 @@
       <div class="controls">
         <div class="control-group">
           <button class="btn" onclick="loadMoreLeads()">📥 Load More Data</button>
+          <button class="btn" onclick="showAlert()">🔔 Test Alert</button>
         </div>
         <div class="control-group">
           <button class="btn primary" id="analyze-patterns-btn" onclick="analyzePatterns()">⚡ Analyze Patterns</button>
-          <button class="btn" id="export-report-btn" disabled>📊 Export Report</button>
+          <button class="btn" id="export-report-btn" onclick="exportReport()" disabled>📊 Export Report</button>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- Export Modal -->
+  <div class="modal-overlay" id="export-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Export Data</span>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="export-preview" id="export-preview">
+          <!-- Preview content will be populated -->
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        <button class="btn primary" onclick="downloadExport()">⬇️ Download</button>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <p>Built by <span class="footer-highlight">Sameer M</span> · AI-Powered Home Services Intelligence · Demo for Bravi</p>
@@ -1476,16 +2297,28 @@
     let currentLeadSample = 0;
     let currentQuoteSample = 0;
     let selectedLead = null;
+    let analyzedLeads = [];
+    let editMode = {};
+    let followupEnabled = false;
 
     // ========================
     // Lead Scorer Data
     // ========================
     const leadSamples = [
       {
-        name: 'Hot Lead - Solar',
+        name: 'Michael Johnson',
+        service: 'Solar',
         score: 92,
         category: 'hot',
+        confidence: 94,
         reason: 'High urgency + budget confirmed + ready to schedule',
+        tags: ['urgency', 'budget', 'intent'],
+        confidenceFactors: [
+          { text: 'Budget mentioned', level: 'high' },
+          { text: 'Timeline specified', level: 'high' },
+          { text: 'Competitor quotes', level: 'high' },
+          { text: 'Decision maker', level: 'medium' }
+        ],
         transcript: [
           { speaker: 'ai', text: 'Hi, this is Sarah from SolarPro. How can I help you today?' },
           { speaker: 'customer', text: 'Yes, I\'m interested in getting solar panels installed. My electricity bills have been <span class="transcript-highlight urgency">killing me lately</span>.' },
@@ -1504,10 +2337,19 @@
         ]
       },
       {
-        name: 'Warm Lead - HVAC',
+        name: 'Lisa Anderson',
+        service: 'HVAC',
         score: 64,
         category: 'warm',
+        confidence: 78,
         reason: 'Interested but needs more information, timeline flexible',
+        tags: ['intent'],
+        confidenceFactors: [
+          { text: 'Problem verified', level: 'high' },
+          { text: 'Timeline vague', level: 'medium' },
+          { text: 'No budget discussed', level: 'low' },
+          { text: 'Research phase', level: 'medium' }
+        ],
         transcript: [
           { speaker: 'ai', text: 'Good afternoon, ClimateControl Services. How may I assist you?' },
           { speaker: 'customer', text: 'Hi, I\'m calling because our AC hasn\'t been working great lately. <span class="transcript-highlight intent">Thinking about replacing it</span>.' },
@@ -1526,10 +2368,19 @@
         ]
       },
       {
-        name: 'Cold Lead - Roofing',
+        name: 'James Wilson',
+        service: 'Roofing',
         score: 28,
         category: 'cold',
+        confidence: 85,
         reason: 'Just information gathering, no timeline or budget discussed',
+        tags: [],
+        confidenceFactors: [
+          { text: 'Info only stated', level: 'high' },
+          { text: 'No urgency', level: 'high' },
+          { text: 'Problem unverified', level: 'medium' },
+          { text: 'Non-committal', level: 'high' }
+        ],
         transcript: [
           { speaker: 'ai', text: 'Thank you for calling RoofMasters. This is Tom speaking.' },
           { speaker: 'customer', text: 'Hi, <span class="transcript-highlight">I\'m just calling to get some information</span> about roof repairs.' },
@@ -1548,10 +2399,19 @@
         ]
       },
       {
-        name: 'Hot Lead - Insulation',
+        name: 'Robert Chen',
+        service: 'Insulation',
         score: 87,
         category: 'hot',
+        confidence: 91,
         reason: 'Strong urgency, energy audit done, ready for quote',
+        tags: ['urgency', 'budget', 'intent'],
+        confidenceFactors: [
+          { text: 'Professional audit', level: 'high' },
+          { text: 'Seasonal urgency', level: 'high' },
+          { text: 'Pain point clear', level: 'high' },
+          { text: 'Quote requested', level: 'high' }
+        ],
         transcript: [
           { speaker: 'ai', text: 'InsulPro Solutions, this is Maria. How can I help?' },
           { speaker: 'customer', text: 'Hi Maria! I just got an energy audit done and they said my <span class="transcript-highlight urgency">insulation is basically non-existent</span>. I need to fix this.' },
@@ -1646,14 +2506,14 @@
     // Opportunity Detector Data
     // ========================
     const lostLeads = [
-      { name: 'David Miller', service: 'Solar', value: '$28,000', sentiment: 65, sentimentType: 'neutral', reason: 'Price' },
-      { name: 'Sarah Connor', service: 'HVAC', value: '$12,000', sentiment: 30, sentimentType: 'negative', reason: 'No Response' },
-      { name: 'James Wilson', service: 'Roofing', value: '$8,500', sentiment: 45, sentimentType: 'neutral', reason: 'Competitor' },
-      { name: 'Emily Brown', service: 'Insulation', value: '$6,200', sentiment: 25, sentimentType: 'negative', reason: 'No Response' },
-      { name: 'Chris Taylor', service: 'Solar', value: '$32,000', sentiment: 55, sentimentType: 'neutral', reason: 'Timeline' },
-      { name: 'Lisa Anderson', service: 'HVAC', value: '$15,000', sentiment: 40, sentimentType: 'negative', reason: 'Price' },
-      { name: 'Mark Thompson', service: 'Windows', value: '$9,800', sentiment: 70, sentimentType: 'positive', reason: 'Unanswered Q' },
-      { name: 'Amy Garcia', service: 'Roofing', value: '$22,000', sentiment: 35, sentimentType: 'negative', reason: 'No Response' }
+      { name: 'David Miller', service: 'Solar', value: '$28,000', sentiment: 65, sentimentType: 'neutral', reason: 'Price', tip: 'Offer financing options' },
+      { name: 'Sarah Connor', service: 'HVAC', value: '$12,000', sentiment: 30, sentimentType: 'negative', reason: 'No Response', tip: 'Reduce response time to <1hr' },
+      { name: 'James Wilson', service: 'Roofing', value: '$8,500', sentiment: 45, sentimentType: 'neutral', reason: 'Competitor', tip: 'Highlight warranty & reviews' },
+      { name: 'Emily Brown', service: 'Insulation', value: '$6,200', sentiment: 25, sentimentType: 'negative', reason: 'No Response', tip: 'Setup auto-reply system' },
+      { name: 'Chris Taylor', service: 'Solar', value: '$32,000', sentiment: 55, sentimentType: 'neutral', reason: 'Timeline', tip: 'Offer flexible scheduling' },
+      { name: 'Lisa Anderson', service: 'HVAC', value: '$15,000', sentiment: 40, sentimentType: 'negative', reason: 'Price', tip: 'Present payment plans upfront' },
+      { name: 'Mark Thompson', service: 'Windows', value: '$9,800', sentiment: 70, sentimentType: 'positive', reason: 'Unanswered Q', tip: 'Add FAQ to website' },
+      { name: 'Amy Garcia', service: 'Roofing', value: '$22,000', sentiment: 35, sentimentType: 'negative', reason: 'No Response', tip: 'Implement callback scheduler' }
     ];
 
     // ========================
@@ -1668,11 +2528,11 @@
       document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
       document.getElementById(demo).classList.add('active');
       
-      // Initialize demo-specific content
       if (demo === 'lead-scorer') {
         renderTranscript(leadSamples[currentLeadSample]);
       } else if (demo === 'opportunity') {
         renderLostLeads();
+        drawTrendsChart();
       }
     }
 
@@ -1689,7 +2549,7 @@
 
     function randomLeadSample() {
       const index = Math.floor(Math.random() * leadSamples.length);
-      const card = document.querySelectorAll('#lead-scorer .sample-card')[index];
+      const card = document.querySelectorAll('#leads-sample-grid .sample-card')[index];
       selectLeadSample(index, card);
     }
 
@@ -1710,6 +2570,7 @@
       document.getElementById('score-reason').textContent = 'Run analysis to see lead score';
       document.getElementById('score-ring-fill').style.strokeDashoffset = '314';
       document.getElementById('signals-list').innerHTML = '';
+      document.getElementById('confidence-section').style.display = 'none';
       document.getElementById('export-lead-btn').disabled = true;
       document.getElementById('ls-status-text').textContent = 'Ready';
     }
@@ -1723,7 +2584,6 @@
       
       const sample = leadSamples[currentLeadSample];
       
-      // Simulate processing
       await sleep(800);
       
       // Update score ring
@@ -1733,17 +2593,25 @@
       ring.style.strokeDashoffset = offset;
       ring.className = `score-ring-fill ${sample.category}`;
       
-      // Animate score number
       animateNumber('score-number', 0, sample.score, 800);
       
       await sleep(400);
       
-      // Update category and reason
       document.getElementById('score-category').textContent = sample.category.toUpperCase() + ' LEAD';
       document.getElementById('score-category').className = `score-category ${sample.category}`;
       document.getElementById('score-reason').textContent = sample.reason;
       
-      // Render signals with animation
+      // Show confidence section
+      document.getElementById('confidence-section').style.display = 'block';
+      document.getElementById('confidence-value').textContent = sample.confidence + '%';
+      document.getElementById('confidence-fill').style.width = sample.confidence + '%';
+      
+      // Render confidence factors
+      document.getElementById('confidence-factors').innerHTML = sample.confidenceFactors.map(f => 
+        `<span class="confidence-factor ${f.level}">${f.text}</span>`
+      ).join('');
+      
+      // Render signals
       const signalsList = document.getElementById('signals-list');
       signalsList.innerHTML = '';
       
@@ -1762,11 +2630,81 @@
         `;
       }
       
+      // Add to analyzed leads
+      if (!analyzedLeads.find(l => l.name === sample.name)) {
+        analyzedLeads.push(sample);
+        analyzedLeads.sort((a, b) => b.score - a.score);
+      }
+      
       document.getElementById('export-lead-btn').disabled = false;
       document.getElementById('ls-status-text').textContent = 'Complete';
       document.getElementById('ls-status').className = 'status-badge ready';
       btn.disabled = false;
       btn.innerHTML = '⚡ Analyze Lead';
+    }
+
+    async function analyzeAllLeads() {
+      analyzedLeads = [...leadSamples].sort((a, b) => b.score - a.score);
+      
+      document.getElementById('ranked-leads-section').style.display = 'block';
+      
+      const table = document.getElementById('ranked-leads-table');
+      const header = table.querySelector('.header');
+      table.innerHTML = '';
+      table.appendChild(header);
+      
+      for (let i = 0; i < analyzedLeads.length; i++) {
+        const lead = analyzedLeads[i];
+        await sleep(200);
+        
+        const row = document.createElement('div');
+        row.className = 'ranked-lead-row';
+        row.innerHTML = `
+          <span class="lead-rank ${lead.category}">#${i + 1}</span>
+          <span class="lead-name-cell">${lead.name}</span>
+          <span>${lead.service}</span>
+          <span class="lead-score-badge ${lead.category}">${lead.score}</span>
+          <span class="lead-signals">
+            ${lead.tags.slice(0, 2).map(t => `<span class="lead-signal-tag">${t}</span>`).join('')}
+          </span>
+          <button class="btn" style="padding: 6px 12px; font-size: 11px;" onclick="selectLeadSample(${leadSamples.indexOf(lead)}, document.querySelectorAll('#leads-sample-grid .sample-card')[${leadSamples.indexOf(lead)}])">View</button>
+        `;
+        table.appendChild(row);
+      }
+    }
+
+    function filterLeads(filter, el) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      
+      const cards = document.querySelectorAll('#leads-sample-grid .sample-card');
+      
+      cards.forEach((card, i) => {
+        const sample = leadSamples[i];
+        let show = false;
+        
+        if (filter === 'all') show = true;
+        else if (filter === 'hot') show = sample.category === 'hot';
+        else if (filter === 'warm') show = sample.category === 'warm';
+        else if (filter === 'cold') show = sample.category === 'cold';
+        else show = sample.tags.includes(filter);
+        
+        card.style.display = show ? 'block' : 'none';
+      });
+    }
+
+    function exportLeadsCSV() {
+      const data = analyzedLeads.map(l => ({
+        Rank: analyzedLeads.indexOf(l) + 1,
+        Name: l.name,
+        Service: l.service,
+        Score: l.score,
+        Category: l.category,
+        Confidence: l.confidence + '%',
+        Signals: l.tags.join(', ')
+      }));
+      
+      showExportModal('leads', data);
     }
 
     // ========================
@@ -1788,9 +2726,12 @@
     function resetQuoteGeneration() {
       const fields = ['service', 'location', 'size', 'timeline', 'customer', 'requirements'];
       fields.forEach(field => {
-        document.getElementById(`ext-${field}`).classList.remove('extracted');
+        const item = document.getElementById(`ext-${field}`);
+        item.classList.remove('extracted', 'editing');
         document.getElementById(`ext-${field}-value`).textContent = 'Awaiting analysis...';
         document.getElementById(`ext-${field}-value`).className = 'extraction-value pending';
+        const conf = item.querySelector('.extraction-confidence');
+        if (conf) conf.remove();
       });
       
       document.getElementById('quote-number').textContent = '---';
@@ -1804,6 +2745,45 @@
       document.getElementById('quote-total').textContent = '$---';
       document.getElementById('export-quote-btn').disabled = true;
       document.getElementById('qg-status-text').textContent = 'Ready';
+      document.getElementById('confirm-edits-btn').style.display = 'none';
+    }
+
+    function toggleEdit(field) {
+      const item = document.getElementById(`ext-${field}`);
+      const input = document.getElementById(`ext-${field}-input`);
+      const value = document.getElementById(`ext-${field}-value`);
+      
+      if (item.classList.contains('editing')) {
+        item.classList.remove('editing');
+        value.textContent = input.value || value.textContent;
+        editMode[field] = false;
+      } else {
+        item.classList.add('editing');
+        input.value = value.textContent;
+        input.focus();
+        editMode[field] = true;
+      }
+      
+      const hasEdits = Object.values(editMode).some(v => v);
+      document.getElementById('confirm-edits-btn').style.display = hasEdits ? 'block' : 'none';
+    }
+
+    function confirmEdits() {
+      const fields = ['service', 'location', 'size', 'timeline', 'customer', 'requirements'];
+      fields.forEach(field => {
+        const item = document.getElementById(`ext-${field}`);
+        if (item.classList.contains('editing')) {
+          toggleEdit(field);
+        }
+      });
+      editMode = {};
+      document.getElementById('confirm-edits-btn').style.display = 'none';
+    }
+
+    function toggleFollowup() {
+      followupEnabled = !followupEnabled;
+      document.getElementById('followup-toggle').classList.toggle('active', followupEnabled);
+      document.getElementById('followup-options').classList.toggle('visible', followupEnabled);
     }
 
     async function generateQuote() {
@@ -1817,23 +2797,24 @@
       const fields = ['service', 'location', 'size', 'timeline', 'customer', 'requirements'];
       const values = [sample.service, sample.location, sample.size, sample.timeline, sample.customer, sample.requirements];
       
-      // Extract each field with animation
       for (let i = 0; i < fields.length; i++) {
-        await sleep(300);
+        await sleep(250);
         const el = document.getElementById(`ext-${fields[i]}`);
         const valueEl = document.getElementById(`ext-${fields[i]}-value`);
+        const inputEl = document.getElementById(`ext-${fields[i]}-input`);
         
         el.classList.add('extracted');
         valueEl.textContent = values[i];
         valueEl.className = 'extraction-value';
+        inputEl.value = values[i];
         
-        // Add confidence
+        const existingConf = el.querySelector('.extraction-confidence');
+        if (existingConf) existingConf.remove();
+        
         const confidenceEl = document.createElement('div');
         confidenceEl.className = 'extraction-confidence';
         confidenceEl.textContent = `✓ ${85 + Math.floor(Math.random() * 15)}% confidence`;
-        if (!el.querySelector('.extraction-confidence')) {
-          el.querySelector('.extraction-content').appendChild(confidenceEl);
-        }
+        el.querySelector('.extraction-content').appendChild(confidenceEl);
       }
       
       await sleep(400);
@@ -1842,7 +2823,6 @@
       
       await sleep(600);
       
-      // Generate quote
       document.getElementById('quote-number').textContent = 'Q-' + Date.now().toString().slice(-6);
       document.getElementById('quote-customer-name').textContent = sample.customer;
       
@@ -1862,6 +2842,38 @@
       btn.innerHTML = '⚡ Generate Quote';
     }
 
+    function previewAsPDF() {
+      alert('PDF Preview\n\n' + 
+        '┌────────────────────────────────┐\n' +
+        '│     SOLARPRO SERVICES          │\n' +
+        '│     Quote #Q-' + document.getElementById('quote-number').textContent + '      │\n' +
+        '│                                │\n' +
+        '│  Prepared for:                 │\n' +
+        '│  ' + document.getElementById('quote-customer-name').textContent + '              │\n' +
+        '│                                │\n' +
+        '│  Total: ' + document.getElementById('quote-total').textContent + '              │\n' +
+        '└────────────────────────────────┘\n\n' +
+        'In production, this would open a full PDF preview.');
+    }
+
+    function previewAsEmail() {
+      const customer = document.getElementById('quote-customer-name').textContent;
+      const total = document.getElementById('quote-total').textContent;
+      
+      alert('Email Preview\n\n' +
+        'To: ' + customer.toLowerCase().replace(' ', '.') + '@email.com\n' +
+        'Subject: Your Quote from SolarPro Services\n\n' +
+        'Hi ' + customer.split(' ')[0] + ',\n\n' +
+        'Thank you for your interest! Please find your quote attached.\n\n' +
+        'Total Estimate: ' + total + '\n\n' +
+        'Let me know if you have any questions.\n\n' +
+        'Best regards,\nSolarPro Team');
+    }
+
+    function exportQuotePDF() {
+      alert('Exporting Quote as PDF...\n\nIn production, this would download:\n- Quote_Q-' + document.getElementById('quote-number').textContent + '.pdf');
+    }
+
     // ========================
     // Opportunity Detector Functions
     // ========================
@@ -1877,7 +2889,7 @@
               <div class="sentiment-fill ${lead.sentimentType}" style="width: ${lead.sentiment}%"></div>
             </div>
           </span>
-          <span class="lead-reason">${lead.reason}</span>
+          <span class="lead-reason reason-tooltip" data-tip="${lead.tip}">${lead.reason} ℹ️</span>
         </div>
       `).join('');
     }
@@ -1890,11 +2902,114 @@
 
     function loadMoreLeads() {
       const newLeads = [
-        { name: 'Kevin Park', service: 'Solar', value: '$26,500', sentiment: 50, sentimentType: 'neutral', reason: 'Competitor' },
-        { name: 'Rachel Kim', service: 'HVAC', value: '$11,000', sentiment: 20, sentimentType: 'negative', reason: 'No Response' }
+        { name: 'Kevin Park', service: 'Solar', value: '$26,500', sentiment: 50, sentimentType: 'neutral', reason: 'Competitor', tip: 'Emphasize local support' },
+        { name: 'Rachel Kim', service: 'HVAC', value: '$11,000', sentiment: 20, sentimentType: 'negative', reason: 'No Response', tip: 'Add SMS follow-up' }
       ];
       lostLeads.push(...newLeads);
       renderLostLeads();
+    }
+
+    function drawTrendsChart() {
+      const canvas = document.getElementById('trends-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = canvas.offsetWidth * 2;
+      canvas.height = canvas.offsetHeight * 2;
+      ctx.scale(2, 2);
+      
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      const padding = { top: 20, right: 20, bottom: 30, left: 45 };
+      
+      ctx.fillStyle = '#12141a';
+      ctx.fillRect(0, 0, w, h);
+      
+      // Grid
+      ctx.strokeStyle = '#2a2f3e';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i++) {
+        const y = padding.top + ((h - padding.top - padding.bottom) * i / 4);
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(w - padding.right, y);
+        ctx.stroke();
+      }
+      
+      // Y-axis labels
+      ctx.fillStyle = '#5c6370';
+      ctx.font = '10px Space Grotesk';
+      ctx.textAlign = 'right';
+      ['100%', '75%', '50%', '25%', '0%'].forEach((label, i) => {
+        const y = padding.top + ((h - padding.top - padding.bottom) * i / 4);
+        ctx.fillText(label, padding.left - 8, y + 4);
+      });
+      
+      // X-axis labels
+      ctx.textAlign = 'center';
+      const days = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      days.forEach((day, i) => {
+        const x = padding.left + ((w - padding.left - padding.right) * i / (days.length - 1));
+        ctx.fillText(day, x, h - 10);
+      });
+      
+      // Conversion line
+      const conversionData = [65, 58, 72, 68];
+      ctx.strokeStyle = '#00d68f';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      conversionData.forEach((val, i) => {
+        const x = padding.left + ((w - padding.left - padding.right) * i / (conversionData.length - 1));
+        const y = padding.top + ((h - padding.top - padding.bottom) * (1 - val / 100));
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      
+      // Lost line
+      const lostData = [35, 42, 28, 32];
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      lostData.forEach((val, i) => {
+        const x = padding.left + ((w - padding.left - padding.right) * i / (lostData.length - 1));
+        const y = padding.top + ((h - padding.top - padding.bottom) * (1 - val / 100));
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      
+      // Points
+      ctx.fillStyle = '#00d68f';
+      conversionData.forEach((val, i) => {
+        const x = padding.left + ((w - padding.left - padding.right) * i / (conversionData.length - 1));
+        const y = padding.top + ((h - padding.top - padding.bottom) * (1 - val / 100));
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      ctx.fillStyle = '#ef4444';
+      lostData.forEach((val, i) => {
+        const x = padding.left + ((w - padding.left - padding.right) * i / (lostData.length - 1));
+        const y = padding.top + ((h - padding.top - padding.bottom) * (1 - val / 100));
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function setPeriod(period, btn) {
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      drawTrendsChart();
+    }
+
+    function showAlert() {
+      document.getElementById('alert-banner').classList.add('visible');
+    }
+
+    function dismissAlert() {
+      document.getElementById('alert-banner').classList.remove('visible');
     }
 
     async function analyzePatterns() {
@@ -1906,10 +3021,9 @@
       
       await sleep(1000);
       
-      // Calculate patterns
       const noResponseCount = lostLeads.filter(l => l.reason === 'No Response').length;
       const priceCount = lostLeads.filter(l => l.reason === 'Price').length;
-      const unansweredCount = lostLeads.filter(l => l.reason === 'Unanswered Q' || l.reason === 'Timeline').length;
+      const unansweredCount = lostLeads.filter(l => l.reason === 'Unanswered Q' || l.reason === 'Timeline' || l.reason === 'Competitor').length;
       
       animateNumber('pattern-response', 0, noResponseCount, 600);
       await sleep(200);
@@ -1919,7 +3033,9 @@
       
       await sleep(500);
       
-      // Show analysis panel
+      // Show alert
+      showAlert();
+      
       const panel = document.getElementById('analysis-panel');
       panel.style.display = 'block';
       
@@ -1936,17 +3052,76 @@
         were lost due to slow or no follow-up, representing 
         <span class="analysis-highlight">$${noResponseValue.toLocaleString()}</span> in lost revenue.
         <br><br>
-        Sentiment analysis shows negative drop-off correlates strongly with response delays over 4 hours.
+        <strong>Trend Alert:</strong> Response time issues increased 12% this week compared to last week.
       `;
       
       document.getElementById('rec-text').textContent = 
-        'Implement automated follow-up within 15 minutes of initial contact. Based on industry data, this could recover up to 35% of currently lost leads. Consider adding SMS notifications and automated appointment scheduling to reduce response friction.';
+        'Implement automated follow-up within 15 minutes of initial contact. Based on industry data, this could recover up to 35% of currently lost leads ($' + Math.round(noResponseValue * 0.35).toLocaleString() + ' potential recovery).';
       
       document.getElementById('export-report-btn').disabled = false;
       document.getElementById('op-status-text').textContent = 'Complete';
       document.getElementById('op-status').className = 'status-badge ready';
       btn.disabled = false;
       btn.innerHTML = '⚡ Analyze Patterns';
+    }
+
+    function exportReport() {
+      const data = lostLeads.map(l => ({
+        Name: l.name,
+        Service: l.service,
+        Value: l.value,
+        Sentiment: l.sentiment + '%',
+        Reason: l.reason,
+        Action: l.tip
+      }));
+      
+      showExportModal('report', data);
+    }
+
+    // ========================
+    // Modal Functions
+    // ========================
+    function showExportModal(type, data) {
+      const modal = document.getElementById('export-modal');
+      const title = document.getElementById('modal-title');
+      const preview = document.getElementById('export-preview');
+      
+      if (type === 'lead') {
+        title.textContent = 'Export Lead Score';
+        const sample = leadSamples[currentLeadSample];
+        preview.innerHTML = `
+          <div class="export-row"><span class="export-cell">Name:</span><span class="export-cell">${sample.name}</span></div>
+          <div class="export-row"><span class="export-cell">Score:</span><span class="export-cell">${sample.score}</span></div>
+          <div class="export-row"><span class="export-cell">Category:</span><span class="export-cell">${sample.category.toUpperCase()}</span></div>
+          <div class="export-row"><span class="export-cell">Confidence:</span><span class="export-cell">${sample.confidence}%</span></div>
+          <div class="export-row"><span class="export-cell">Signals:</span><span class="export-cell">${sample.tags.join(', ')}</span></div>
+        `;
+      } else if (type === 'leads' || type === 'report') {
+        title.textContent = type === 'leads' ? 'Export Leads to CSV' : 'Export Report';
+        const headers = Object.keys(data[0]);
+        preview.innerHTML = `
+          <div class="export-row" style="font-weight: 600; border-bottom: 1px solid var(--border);">
+            ${headers.map(h => `<span class="export-cell">${h}</span>`).join('')}
+          </div>
+          ${data.slice(0, 5).map(row => `
+            <div class="export-row">
+              ${headers.map(h => `<span class="export-cell">${row[h]}</span>`).join('')}
+            </div>
+          `).join('')}
+          ${data.length > 5 ? `<div style="text-align: center; padding: 10px; color: var(--text-muted);">... and ${data.length - 5} more rows</div>` : ''}
+        `;
+      }
+      
+      modal.classList.add('visible');
+    }
+
+    function closeModal() {
+      document.getElementById('export-modal').classList.remove('visible');
+    }
+
+    function downloadExport() {
+      alert('Download started!\n\nIn production, this would download the file.');
+      closeModal();
     }
 
     // ========================
@@ -1982,6 +3157,12 @@
     window.addEventListener('load', () => {
       renderTranscript(leadSamples[0]);
       renderLostLeads();
+    });
+    
+    window.addEventListener('resize', () => {
+      if (currentDemo === 'opportunity') {
+        drawTrendsChart();
+      }
     });
   </script>
 </body>
