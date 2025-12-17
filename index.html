@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bravi AI Suite | Home Services Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-primary: #0a0b0f;
+      --bg-secondary: #12141a;
+      --bg-tertiary: #1a1d26;
+      --bg-card: #1e2130;
+      --accent-primary: #00d68f;
+      --accent-secondary: #00b377;
+      --accent-blue: #0095ff;
+      --accent-purple: #a855f7;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-pink: #ec4899;
+      --text-primary: #f8fafc;
+      --text-secondary: #8b95a5;
+      --text-muted: #5c6370;
+      --border: #2a2f3e;
+      --border-light: #3a4055;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-primary);
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* Background Effects */
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-gradient-1 {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      top: -200px;
+      left: -200px;
+      background: radial-gradient(circle, rgba(0,214,143,0.08) 0%, transparent 70%);
+    }
+
+    .bg-gradient-2 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      bottom: -100px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(0,149,255,0.06) 0%, transparent 70%);
+    }
+
+    .noise-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+    }
+
+    /* Header */
+    .header {
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 100;
+      background: rgba(10,11,15,0.95);
+      backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-blue));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 20px rgba(0,214,143,0.3);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-secondary);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      padding: 10px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-primary);
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,214,143,0.3);
+    }
+
+    .nav-tab-icon {
+      font-size: 16px;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(0,214,143,0.1);
+      border: 1px solid rgba(0,214,143,0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Demo Panels */
+    .demo-panel {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .demo-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Section */
+    .demo-hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .demo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .demo-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .demo-title .highlight {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .demo-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Card Styles */
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Status Badge */
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .status-badge.ready {
+      background: rgba(0,214,143,0.15);
+      border: 1px solid rgba(0,214,143,0.3);
+      color: var(--accent-primary);
+    }
+
+    .status-badge.processing {
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--accent-amber);
+    }
+
+    .status-badge.high {
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: var(--accent-red);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* ====================
+       LEAD SCORER STYLES
+       ==================== */
+    .lead-scorer-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 24px;
+    }
+
+    .transcript-area {
+      min-height: 300px;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .transcript-line {
+      margin-bottom: 16px;
+      padding-left: 80px;
+      position: relative;
+    }
+
+    .transcript-speaker {
+      position: absolute;
+      left: 0;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .transcript-speaker.ai { color: var(--accent-primary); }
+    .transcript-speaker.customer { color: var(--accent-blue); }
+
+    .transcript-text {
+      color: var(--text-secondary);
+    }
+
+    .transcript-highlight {
+      background: rgba(0,214,143,0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-primary);
+    }
+
+    .transcript-highlight.urgency { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+    .transcript-highlight.budget { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
+    .transcript-highlight.intent { background: rgba(0,149,255,0.2); color: var(--accent-blue); }
+
+    /* Lead Score Display */
+    .score-display {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .score-ring {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .score-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-ring-bg {
+      fill: none;
+      stroke: var(--bg-tertiary);
+      stroke-width: 12;
+    }
+
+    .score-ring-fill {
+      fill: none;
+      stroke-width: 12;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease, stroke 0.5s ease;
+    }
+
+    .score-ring-fill.hot { stroke: var(--accent-primary); }
+    .score-ring-fill.warm { stroke: var(--accent-amber); }
+    .score-ring-fill.cold { stroke: var(--accent-blue); }
+
+    .score-value {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-number {
+      font-size: 48px;
+      font-weight: 700;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .score-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-category {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .score-category.hot { color: var(--accent-primary); }
+    .score-category.warm { color: var(--accent-amber); }
+    .score-category.cold { color: var(--accent-blue); }
+
+    .score-reason {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Signal List */
+    .signals-list {
+      margin-top: 24px;
+    }
+
+    .signal-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .signal-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .signal-icon.positive { background: rgba(0,214,143,0.2); }
+    .signal-icon.neutral { background: rgba(245,158,11,0.2); }
+    .signal-icon.negative { background: rgba(239,68,68,0.2); }
+
+    .signal-content {
+      flex: 1;
+    }
+
+    .signal-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .signal-detail {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .signal-weight {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .signal-weight.positive { color: var(--accent-primary); }
+    .signal-weight.negative { color: var(--accent-red); }
+
+    /* ====================
+       QUOTE GENERATOR STYLES
+       ==================== */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .extraction-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .extraction-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      border-left: 3px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .extraction-item.extracted {
+      border-left-color: var(--accent-primary);
+      background: rgba(0,214,143,0.05);
+    }
+
+    .extraction-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .extraction-content {
+      flex: 1;
+    }
+
+    .extraction-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .extraction-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .extraction-value.pending {
+      color: var(--text-muted);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .extraction-confidence {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--accent-primary);
+      margin-top: 4px;
+    }
+
+    /* Quote Preview */
+    .quote-preview {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .quote-header {
+      padding: 20px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: var(--bg-primary);
+    }
+
+    .quote-company {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .quote-number {
+      font-size: 12px;
+      opacity: 0.8;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .quote-body {
+      padding: 20px;
+    }
+
+    .quote-customer {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote-customer-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .quote-customer-name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .quote-line-items {
+      margin-bottom: 20px;
+    }
+
+    .quote-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .quote-line:last-child {
+      border-bottom: none;
+    }
+
+    .quote-line-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .quote-line-price {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 600;
+    }
+
+    .quote-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    .quote-total-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .quote-total-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    /* ====================
+       OPPORTUNITY DETECTOR STYLES
+       ==================== */
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .opportunity-full {
+      grid-column: 1 / -1;
+    }
+
+    /* Lost Leads Table */
+    .leads-table {
+      width: 100%;
+    }
+
+    .leads-table-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .leads-table-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .leads-table-row:hover {
+      border-color: var(--accent-primary);
+      background: rgba(0,214,143,0.05);
+    }
+
+    .leads-table-row.selected {
+      border-color: var(--accent-primary);
+      background: rgba(0,214,143,0.1);
+    }
+
+    .lead-name {
+      font-weight: 600;
+    }
+
+    .lead-service {
+      color: var(--text-secondary);
+    }
+
+    .lead-value {
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .lead-sentiment {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sentiment-bar {
+      width: 60px;
+      height: 6px;
+      background: var(--bg-card);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sentiment-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .sentiment-fill.positive { background: var(--accent-primary); }
+    .sentiment-fill.neutral { background: var(--accent-amber); }
+    .sentiment-fill.negative { background: var(--accent-red); }
+
+    .lead-reason {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(239,68,68,0.15);
+      color: var(--accent-red);
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Pattern Cards */
+    .pattern-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .pattern-card {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .pattern-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    .pattern-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .pattern-icon.red { background: rgba(239,68,68,0.15); }
+    .pattern-icon.amber { background: rgba(245,158,11,0.15); }
+    .pattern-icon.blue { background: rgba(0,149,255,0.15); }
+
+    .pattern-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .pattern-stat {
+      font-size: 28px;
+      font-weight: 700;
+      font-family: "IBM Plex Mono", monospace;
+      margin-bottom: 6px;
+    }
+
+    .pattern-stat.red { color: var(--accent-red); }
+    .pattern-stat.amber { color: var(--accent-amber); }
+    .pattern-stat.blue { color: var(--accent-blue); }
+
+    .pattern-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Analysis Panel */
+    .analysis-panel {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .analysis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .analysis-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .analysis-content {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .analysis-highlight {
+      color: var(--accent-primary);
+      font-weight: 500;
+    }
+
+    .analysis-recommendation {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(0,214,143,0.1);
+      border: 1px solid rgba(0,214,143,0.2);
+      border-radius: 8px;
+    }
+
+    .rec-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .rec-text {
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* Chart Container */
+    .chart-container {
+      height: 200px;
+      position: relative;
+    }
+
+    .chart-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .control-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      border-color: var(--accent-primary);
+      background: rgba(0,214,143,0.1);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border: none;
+      color: var(--bg-primary);
+      font-weight: 600;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,214,143,0.35);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Sample Selector */
+    .samples-section {
+      margin-top: 32px;
+    }
+
+    .samples-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .sample-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sample-card:hover {
+      border-color: var(--accent-primary);
+      background: rgba(0,214,143,0.03);
+    }
+
+    .sample-card.selected {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px rgba(0,214,143,0.3);
+      background: rgba(0,214,143,0.05);
+    }
+
+    .sample-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .sample-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .sample-type {
+      font-size: 9px;
+      padding: 3px 8px;
+      background: rgba(168,85,247,0.2);
+      color: var(--accent-purple);
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sample-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .sample-meta span {
+      color: var(--text-primary);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .footer-highlight {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .lead-scorer-grid,
+      .quote-grid,
+      .opportunity-grid {
+        grid-template-columns: 1fr;
+      }
+      .pattern-cards {
+        grid-template-columns: 1fr;
+      }
+      .samples-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+      }
+      .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+      }
+      .samples-grid {
+        grid-template-columns: 1fr;
+      }
+      .demo-title {
+        font-size: 28px;
+      }
+      .leads-table-header,
+      .leads-table-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects">
+    <div class="bg-gradient-1"></div>
+    <div class="bg-gradient-2"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🏠</div>
+      <div>
+        <div class="logo-text">Bravi AI Suite</div>
+        <div class="logo-sub">Home Services Intelligence</div>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-tab active" onclick="switchDemo('lead-scorer', this)">
+        <span class="nav-tab-icon">📊</span>
+        Lead Scorer
+      </button>
+      <button class="nav-tab" onclick="switchDemo('quote-gen', this)">
+        <span class="nav-tab-icon">📝</span>
+        Quote Generator
+      </button>
+      <button class="nav-tab" onclick="switchDemo('opportunity', this)">
+        <span class="nav-tab-icon">🔍</span>
+        Opportunity Detector
+      </button>
+    </nav>
+
+    <div class="header-badge">
+      <span class="pulse-dot"></span>
+      Demo Mode
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- ========================
+         LEAD SCORER DEMO
+         ======================== -->
+    <div class="demo-panel active" id="lead-scorer">
+      <div class="demo-hero">
+        <div class="demo-badge">🎯 NLP-Powered Analysis</div>
+        <h1 class="demo-title">Intelligent <span class="highlight">Lead Scorer</span></h1>
+        <p class="demo-subtitle">Automatically analyze call transcripts to identify buying signals, urgency indicators, and budget mentions for smarter lead prioritization.</p>
+      </div>
+
+      <div class="lead-scorer-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Call Transcript</span>
+            <div class="status-badge ready" id="ls-status">
+              <span class="status-dot"></span>
+              <span id="ls-status-text">Ready</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="transcript-area" id="transcript-area">
+              <!-- Transcript content will be populated -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Lead Score Analysis</span>
+          </div>
+          <div class="card-body">
+            <div class="score-display">
+              <div class="score-ring">
+                <svg viewBox="0 0 120 120">
+                  <circle class="score-ring-bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="score-ring-fill hot" id="score-ring-fill" cx="60" cy="60" r="50" 
+                    stroke-dasharray="314" stroke-dashoffset="314"></circle>
+                </svg>
+                <div class="score-value">
+                  <span class="score-number" id="score-number">--</span>
+                  <span class="score-label">Lead Score</span>
+                </div>
+              </div>
+              <div class="score-category hot" id="score-category">--</div>
+              <div class="score-reason" id="score-reason">Run analysis to see lead score</div>
+            </div>
+
+            <div class="signals-list" id="signals-list">
+              <!-- Signals will be populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="samples-section">
+        <div class="samples-label">Sample Conversations</div>
+        <div class="samples-grid">
+          <div class="sample-card selected" onclick="selectLeadSample(0, this)">
+            <div class="sample-header">
+              <span class="sample-name">Hot Lead - Solar</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Duration: <span>4:32</span></span>
+              <span>Service: <span>Solar</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectLeadSample(1, this)">
+            <div class="sample-header">
+              <span class="sample-name">Warm Lead - HVAC</span>
+              <span class="sample-type">Commercial</span>
+            </div>
+            <div class="sample-meta">
+              <span>Duration: <span>3:15</span></span>
+              <span>Service: <span>HVAC</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectLeadSample(2, this)">
+            <div class="sample-header">
+              <span class="sample-name">Cold Lead - Roofing</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Duration: <span>1:45</span></span>
+              <span>Service: <span>Roofing</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectLeadSample(3, this)">
+            <div class="sample-header">
+              <span class="sample-name">Hot Lead - Insulation</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Duration: <span>5:20</span></span>
+              <span>Service: <span>Insulation</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <button class="btn" onclick="randomLeadSample()">🔀 Random Call</button>
+        </div>
+        <div class="control-group">
+          <button class="btn primary" id="analyze-lead-btn" onclick="analyzeLeadScore()">⚡ Analyze Lead</button>
+          <button class="btn" id="export-lead-btn" disabled>💾 Export Score</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================
+         QUOTE GENERATOR DEMO
+         ======================== -->
+    <div class="demo-panel" id="quote-gen">
+      <div class="demo-hero">
+        <div class="demo-badge">📝 Automated Extraction</div>
+        <h1 class="demo-title">Smart <span class="highlight">Quote Generator</span></h1>
+        <p class="demo-subtitle">Extract job details from conversations and automatically generate professional quotes in seconds.</p>
+      </div>
+
+      <div class="quote-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Extracted Information</span>
+            <div class="status-badge ready" id="qg-status">
+              <span class="status-dot"></span>
+              <span id="qg-status-text">Ready</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="extraction-list" id="extraction-list">
+              <div class="extraction-item" id="ext-service">
+                <div class="extraction-icon">🔧</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Service Type</div>
+                  <div class="extraction-value pending" id="ext-service-value">Awaiting analysis...</div>
+                </div>
+              </div>
+              <div class="extraction-item" id="ext-location">
+                <div class="extraction-icon">📍</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Location</div>
+                  <div class="extraction-value pending" id="ext-location-value">Awaiting analysis...</div>
+                </div>
+              </div>
+              <div class="extraction-item" id="ext-size">
+                <div class="extraction-icon">📐</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Project Size</div>
+                  <div class="extraction-value pending" id="ext-size-value">Awaiting analysis...</div>
+                </div>
+              </div>
+              <div class="extraction-item" id="ext-timeline">
+                <div class="extraction-icon">📅</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Timeline</div>
+                  <div class="extraction-value pending" id="ext-timeline-value">Awaiting analysis...</div>
+                </div>
+              </div>
+              <div class="extraction-item" id="ext-customer">
+                <div class="extraction-icon">👤</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Customer Name</div>
+                  <div class="extraction-value pending" id="ext-customer-value">Awaiting analysis...</div>
+                </div>
+              </div>
+              <div class="extraction-item" id="ext-requirements">
+                <div class="extraction-icon">📋</div>
+                <div class="extraction-content">
+                  <div class="extraction-label">Special Requirements</div>
+                  <div class="extraction-value pending" id="ext-requirements-value">Awaiting analysis...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Generated Quote</span>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="quote-preview" id="quote-preview">
+              <div class="quote-header">
+                <div class="quote-company">SolarPro Services</div>
+                <div class="quote-number">Quote #<span id="quote-number">---</span></div>
+              </div>
+              <div class="quote-body">
+                <div class="quote-customer">
+                  <div class="quote-customer-label">Prepared For</div>
+                  <div class="quote-customer-name" id="quote-customer-name">---</div>
+                </div>
+                <div class="quote-line-items" id="quote-line-items">
+                  <div class="quote-line">
+                    <span class="quote-line-desc">Awaiting extraction...</span>
+                    <span class="quote-line-price">---</span>
+                  </div>
+                </div>
+                <div class="quote-total">
+                  <span class="quote-total-label">Total Estimate</span>
+                  <span class="quote-total-value" id="quote-total">$---</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="samples-section">
+        <div class="samples-label">Sample Conversations</div>
+        <div class="samples-grid">
+          <div class="sample-card selected" onclick="selectQuoteSample(0, this)">
+            <div class="sample-header">
+              <span class="sample-name">Solar Installation</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Sq ft: <span>2,400</span></span>
+              <span>Panels: <span>24</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectQuoteSample(1, this)">
+            <div class="sample-header">
+              <span class="sample-name">HVAC Replacement</span>
+              <span class="sample-type">Commercial</span>
+            </div>
+            <div class="sample-meta">
+              <span>Units: <span>3</span></span>
+              <span>Tons: <span>15</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectQuoteSample(2, this)">
+            <div class="sample-header">
+              <span class="sample-name">Roof Repair</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Area: <span>800 sq ft</span></span>
+              <span>Type: <span>Shingle</span></span>
+            </div>
+          </div>
+          <div class="sample-card" onclick="selectQuoteSample(3, this)">
+            <div class="sample-header">
+              <span class="sample-name">Insulation Upgrade</span>
+              <span class="sample-type">Residential</span>
+            </div>
+            <div class="sample-meta">
+              <span>Attic: <span>1,200 sq ft</span></span>
+              <span>R-Value: <span>R-49</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <button class="btn" onclick="randomQuoteSample()">🔀 Random Job</button>
+        </div>
+        <div class="control-group">
+          <button class="btn primary" id="generate-quote-btn" onclick="generateQuote()">⚡ Generate Quote</button>
+          <button class="btn" id="export-quote-btn" disabled>📄 Export PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================
+         OPPORTUNITY DETECTOR DEMO
+         ======================== -->
+    <div class="demo-panel" id="opportunity">
+      <div class="demo-hero">
+        <div class="demo-badge">🔍 Pattern Recognition</div>
+        <h1 class="demo-title">Missed <span class="highlight">Opportunity Detector</span></h1>
+        <p class="demo-subtitle">Analyze historical call data to identify patterns in lost leads and uncover actionable insights to improve conversion rates.</p>
+      </div>
+
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <span class="card-title">Lost Leads Analysis</span>
+          <div class="status-badge ready" id="op-status">
+            <span class="status-dot"></span>
+            <span id="op-status-text">Ready</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="leads-table">
+            <div class="leads-table-header">
+              <span>Lead</span>
+              <span>Service</span>
+              <span>Value</span>
+              <span>Sentiment</span>
+              <span>Drop Reason</span>
+            </div>
+            <div id="leads-table-body">
+              <!-- Leads will be populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-cards" id="pattern-cards">
+        <div class="pattern-card">
+          <div class="pattern-icon red">⏱️</div>
+          <div class="pattern-title">Response Time Issue</div>
+          <div class="pattern-stat red" id="pattern-response">--</div>
+          <div class="pattern-desc">Leads that dropped due to slow follow-up (>4 hours)</div>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-icon amber">💰</div>
+          <div class="pattern-title">Price Objection</div>
+          <div class="pattern-stat amber" id="pattern-price">--</div>
+          <div class="pattern-desc">Leads lost at the pricing discussion stage</div>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-icon blue">❓</div>
+          <div class="pattern-title">Unanswered Questions</div>
+          <div class="pattern-stat blue" id="pattern-questions">--</div>
+          <div class="pattern-desc">Leads with unresolved concerns or questions</div>
+        </div>
+      </div>
+
+      <div class="analysis-panel" id="analysis-panel" style="display: none;">
+        <div class="analysis-header">
+          <span class="analysis-title">🧠 AI Analysis</span>
+        </div>
+        <div class="analysis-content" id="analysis-content">
+          <!-- Analysis content will be populated -->
+        </div>
+        <div class="analysis-recommendation">
+          <div class="rec-label">💡 Recommendation</div>
+          <div class="rec-text" id="rec-text">
+            <!-- Recommendation will be populated -->
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <button class="btn" onclick="loadMoreLeads()">📥 Load More Data</button>
+        </div>
+        <div class="control-group">
+          <button class="btn primary" id="analyze-patterns-btn" onclick="analyzePatterns()">⚡ Analyze Patterns</button>
+          <button class="btn" id="export-report-btn" disabled>📊 Export Report</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Built by <span class="footer-highlight">Sameer M</span> · AI-Powered Home Services Intelligence · Demo for Bravi</p>
+  </footer>
+
+  <script>
+    // ========================
+    // State Management
+    // ========================
+    let currentDemo = 'lead-scorer';
+    let currentLeadSample = 0;
+    let currentQuoteSample = 0;
+    let selectedLead = null;
+
+    // ========================
+    // Lead Scorer Data
+    // ========================
+    const leadSamples = [
+      {
+        name: 'Hot Lead - Solar',
+        score: 92,
+        category: 'hot',
+        reason: 'High urgency + budget confirmed + ready to schedule',
+        transcript: [
+          { speaker: 'ai', text: 'Hi, this is Sarah from SolarPro. How can I help you today?' },
+          { speaker: 'customer', text: 'Yes, I\'m interested in getting solar panels installed. My electricity bills have been <span class="transcript-highlight urgency">killing me lately</span>.' },
+          { speaker: 'ai', text: 'I understand! Many homeowners are experiencing the same thing. Can I ask about your home?' },
+          { speaker: 'customer', text: 'Sure, it\'s a 2,400 square foot house, south-facing roof. I\'ve already gotten quotes from two other companies, but I wanted to compare.' },
+          { speaker: 'ai', text: 'That\'s great that you\'re doing your research. What\'s your timeline looking like?' },
+          { speaker: 'customer', text: '<span class="transcript-highlight urgency">As soon as possible</span>, honestly. I want to take advantage of the tax credits <span class="transcript-highlight intent">before they change next year</span>.' },
+          { speaker: 'ai', text: 'Absolutely. Do you have a budget range in mind?' },
+          { speaker: 'customer', text: 'I\'ve been told around <span class="transcript-highlight budget">$25,000 to $35,000</span> is typical. I\'m pre-approved for financing if needed.' }
+        ],
+        signals: [
+          { icon: '🔥', type: 'positive', name: 'Urgency Detected', detail: '"As soon as possible", "killing me"', weight: '+25' },
+          { icon: '💰', type: 'positive', name: 'Budget Confirmed', detail: '$25K-$35K range, pre-approved financing', weight: '+30' },
+          { icon: '🎯', type: 'positive', name: 'High Intent', detail: 'Already got competitor quotes', weight: '+20' },
+          { icon: '📅', type: 'positive', name: 'Timeline Pressure', detail: 'Tax credit deadline motivation', weight: '+17' }
+        ]
+      },
+      {
+        name: 'Warm Lead - HVAC',
+        score: 64,
+        category: 'warm',
+        reason: 'Interested but needs more information, timeline flexible',
+        transcript: [
+          { speaker: 'ai', text: 'Good afternoon, ClimateControl Services. How may I assist you?' },
+          { speaker: 'customer', text: 'Hi, I\'m calling because our AC hasn\'t been working great lately. <span class="transcript-highlight intent">Thinking about replacing it</span>.' },
+          { speaker: 'ai', text: 'I\'d be happy to help. How old is your current system?' },
+          { speaker: 'customer', text: 'It\'s about 15 years old. The repair guy said it might be worth replacing instead of fixing again.' },
+          { speaker: 'ai', text: 'At 15 years, that\'s definitely worth considering. When would you like someone to take a look?' },
+          { speaker: 'customer', text: 'I\'m not in a huge rush. <span class="transcript-highlight">Maybe in the next month or so</span>? I want to do some research first.' },
+          { speaker: 'ai', text: 'Of course. Do you have any questions I can answer now?' },
+          { speaker: 'customer', text: 'What\'s the typical cost range for a full replacement? Just ballpark.' }
+        ],
+        signals: [
+          { icon: '🔧', type: 'positive', name: 'Problem Identified', detail: 'AC not working, 15 years old', weight: '+20' },
+          { icon: '🎯', type: 'positive', name: 'Replacement Intent', detail: 'Considering full replacement', weight: '+15' },
+          { icon: '⏳', type: 'neutral', name: 'Flexible Timeline', detail: '"Next month or so", wants to research', weight: '+5' },
+          { icon: '❓', type: 'neutral', name: 'Price Shopping', detail: 'Asking for ballpark without commitment', weight: '+10' }
+        ]
+      },
+      {
+        name: 'Cold Lead - Roofing',
+        score: 28,
+        category: 'cold',
+        reason: 'Just information gathering, no timeline or budget discussed',
+        transcript: [
+          { speaker: 'ai', text: 'Thank you for calling RoofMasters. This is Tom speaking.' },
+          { speaker: 'customer', text: 'Hi, <span class="transcript-highlight">I\'m just calling to get some information</span> about roof repairs.' },
+          { speaker: 'ai', text: 'Of course! What kind of information are you looking for?' },
+          { speaker: 'customer', text: 'My neighbor said they thought they saw some damage on my roof. I haven\'t looked myself yet.' },
+          { speaker: 'ai', text: 'I see. Would you like us to send someone out for a free inspection?' },
+          { speaker: 'customer', text: 'Maybe eventually. <span class="transcript-highlight">I\'m really just gathering info right now</span>. What would a repair typically cost?' },
+          { speaker: 'ai', text: 'It varies widely depending on the damage. Could be $500 to $5000 or more.' },
+          { speaker: 'customer', text: 'Okay, thanks. I\'ll think about it and maybe call back.' }
+        ],
+        signals: [
+          { icon: '📞', type: 'neutral', name: 'Information Only', detail: 'Explicitly stated just gathering info', weight: '+5' },
+          { icon: '🤷', type: 'negative', name: 'Unverified Problem', detail: 'Hasn\'t confirmed damage exists', weight: '-10' },
+          { icon: '⏰', type: 'negative', name: 'No Timeline', detail: '"Maybe eventually", "think about it"', weight: '-15' },
+          { icon: '💤', type: 'negative', name: 'Low Engagement', detail: 'Non-committal responses throughout', weight: '-10' }
+        ]
+      },
+      {
+        name: 'Hot Lead - Insulation',
+        score: 87,
+        category: 'hot',
+        reason: 'Strong urgency, energy audit done, ready for quote',
+        transcript: [
+          { speaker: 'ai', text: 'InsulPro Solutions, this is Maria. How can I help?' },
+          { speaker: 'customer', text: 'Hi Maria! I just got an energy audit done and they said my <span class="transcript-highlight urgency">insulation is basically non-existent</span>. I need to fix this.' },
+          { speaker: 'ai', text: 'Oh no! That\'s definitely fixable. Do you have the audit report?' },
+          { speaker: 'customer', text: 'Yes, they recommended R-49 for the attic. It\'s about 1,200 square feet up there.' },
+          { speaker: 'ai', text: 'Perfect, that gives us exactly what we need. When are you looking to get this done?' },
+          { speaker: 'customer', text: '<span class="transcript-highlight urgency">Before winter hits</span>, definitely. My heating bills were <span class="transcript-highlight budget">over $400 a month</span> last year.' },
+          { speaker: 'ai', text: 'That\'s a lot! With proper insulation, you could cut that significantly.' },
+          { speaker: 'customer', text: 'That\'s what they said. <span class="transcript-highlight intent">Can you come out this week for a quote?</span>' }
+        ],
+        signals: [
+          { icon: '📋', type: 'positive', name: 'Qualified Problem', detail: 'Professional energy audit confirms need', weight: '+25' },
+          { icon: '🔥', type: 'positive', name: 'Urgency - Seasonal', detail: 'Wants done before winter', weight: '+20' },
+          { icon: '💰', type: 'positive', name: 'Pain Point - Cost', detail: '$400/mo heating bills cited', weight: '+22' },
+          { icon: '📅', type: 'positive', name: 'Quote Requested', detail: 'Asked for appointment this week', weight: '+20' }
+        ]
+      }
+    ];
+
+    // ========================
+    // Quote Generator Data
+    // ========================
+    const quoteSamples = [
+      {
+        service: 'Solar Panel Installation',
+        location: '742 Evergreen Terrace, Springfield',
+        size: '2,400 sq ft roof, 24 panels',
+        timeline: 'Within 3 weeks',
+        customer: 'Michael Johnson',
+        requirements: 'South-facing installation, battery backup',
+        lineItems: [
+          { desc: '24x 400W Monocrystalline Panels', price: 9600 },
+          { desc: 'Inverter System (10kW)', price: 3200 },
+          { desc: 'Mounting Hardware & Racking', price: 2400 },
+          { desc: 'Electrical Work & Permitting', price: 2800 },
+          { desc: 'Battery Backup (13.5kWh)', price: 8500 },
+          { desc: 'Installation Labor', price: 4500 }
+        ],
+        total: 31000
+      },
+      {
+        service: 'Commercial HVAC Replacement',
+        location: '500 Business Park Dr, Suite 100',
+        size: '3 units, 15 tons total capacity',
+        timeline: 'Within 2 weeks',
+        customer: 'Acme Corporation',
+        requirements: 'After-hours installation, minimal disruption',
+        lineItems: [
+          { desc: '3x 5-Ton Commercial AC Units', price: 18000 },
+          { desc: 'Ductwork Modification', price: 4500 },
+          { desc: 'Thermostats & Controls', price: 1800 },
+          { desc: 'Electrical Upgrades', price: 3200 },
+          { desc: 'Installation Labor (After-hours)', price: 6500 }
+        ],
+        total: 34000
+      },
+      {
+        service: 'Roof Repair - Shingle',
+        location: '123 Oak Street, Riverside',
+        size: '800 sq ft damaged area',
+        timeline: 'ASAP - Active leak',
+        customer: 'Jennifer Williams',
+        requirements: 'Match existing shingle color, warranty',
+        lineItems: [
+          { desc: 'Architectural Shingles (800 sq ft)', price: 2400 },
+          { desc: 'Underlayment & Ice Shield', price: 800 },
+          { desc: 'Flashing & Ventilation', price: 600 },
+          { desc: 'Debris Removal', price: 400 },
+          { desc: 'Labor & Installation', price: 2800 }
+        ],
+        total: 7000
+      },
+      {
+        service: 'Attic Insulation Upgrade',
+        location: '456 Maple Avenue, Greenfield',
+        size: '1,200 sq ft attic, R-49 spec',
+        timeline: 'Before winter (4-6 weeks)',
+        customer: 'Robert Chen',
+        requirements: 'Remove old insulation, air sealing',
+        lineItems: [
+          { desc: 'R-49 Blown-In Insulation (1200 sq ft)', price: 3600 },
+          { desc: 'Old Insulation Removal', price: 1200 },
+          { desc: 'Air Sealing Package', price: 800 },
+          { desc: 'Vapor Barrier Installation', price: 600 },
+          { desc: 'Installation Labor', price: 1800 }
+        ],
+        total: 8000
+      }
+    ];
+
+    // ========================
+    // Opportunity Detector Data
+    // ========================
+    const lostLeads = [
+      { name: 'David Miller', service: 'Solar', value: '$28,000', sentiment: 65, sentimentType: 'neutral', reason: 'Price' },
+      { name: 'Sarah Connor', service: 'HVAC', value: '$12,000', sentiment: 30, sentimentType: 'negative', reason: 'No Response' },
+      { name: 'James Wilson', service: 'Roofing', value: '$8,500', sentiment: 45, sentimentType: 'neutral', reason: 'Competitor' },
+      { name: 'Emily Brown', service: 'Insulation', value: '$6,200', sentiment: 25, sentimentType: 'negative', reason: 'No Response' },
+      { name: 'Chris Taylor', service: 'Solar', value: '$32,000', sentiment: 55, sentimentType: 'neutral', reason: 'Timeline' },
+      { name: 'Lisa Anderson', service: 'HVAC', value: '$15,000', sentiment: 40, sentimentType: 'negative', reason: 'Price' },
+      { name: 'Mark Thompson', service: 'Windows', value: '$9,800', sentiment: 70, sentimentType: 'positive', reason: 'Unanswered Q' },
+      { name: 'Amy Garcia', service: 'Roofing', value: '$22,000', sentiment: 35, sentimentType: 'negative', reason: 'No Response' }
+    ];
+
+    // ========================
+    // Demo Navigation
+    // ========================
+    function switchDemo(demo, btn) {
+      currentDemo = demo;
+      
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(demo).classList.add('active');
+      
+      // Initialize demo-specific content
+      if (demo === 'lead-scorer') {
+        renderTranscript(leadSamples[currentLeadSample]);
+      } else if (demo === 'opportunity') {
+        renderLostLeads();
+      }
+    }
+
+    // ========================
+    // Lead Scorer Functions
+    // ========================
+    function selectLeadSample(index, el) {
+      currentLeadSample = index;
+      document.querySelectorAll('#lead-scorer .sample-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      resetLeadAnalysis();
+      renderTranscript(leadSamples[index]);
+    }
+
+    function randomLeadSample() {
+      const index = Math.floor(Math.random() * leadSamples.length);
+      const card = document.querySelectorAll('#lead-scorer .sample-card')[index];
+      selectLeadSample(index, card);
+    }
+
+    function renderTranscript(sample) {
+      const container = document.getElementById('transcript-area');
+      container.innerHTML = sample.transcript.map(line => `
+        <div class="transcript-line">
+          <span class="transcript-speaker ${line.speaker}">${line.speaker === 'ai' ? 'Agent' : 'Customer'}</span>
+          <span class="transcript-text">${line.text}</span>
+        </div>
+      `).join('');
+    }
+
+    function resetLeadAnalysis() {
+      document.getElementById('score-number').textContent = '--';
+      document.getElementById('score-category').textContent = '--';
+      document.getElementById('score-category').className = 'score-category';
+      document.getElementById('score-reason').textContent = 'Run analysis to see lead score';
+      document.getElementById('score-ring-fill').style.strokeDashoffset = '314';
+      document.getElementById('signals-list').innerHTML = '';
+      document.getElementById('export-lead-btn').disabled = true;
+      document.getElementById('ls-status-text').textContent = 'Ready';
+    }
+
+    async function analyzeLeadScore() {
+      const btn = document.getElementById('analyze-lead-btn');
+      btn.disabled = true;
+      btn.innerHTML = '⟳ Analyzing...';
+      document.getElementById('ls-status-text').textContent = 'Processing...';
+      document.getElementById('ls-status').className = 'status-badge processing';
+      
+      const sample = leadSamples[currentLeadSample];
+      
+      // Simulate processing
+      await sleep(800);
+      
+      // Update score ring
+      const circumference = 314;
+      const offset = circumference - (sample.score / 100) * circumference;
+      const ring = document.getElementById('score-ring-fill');
+      ring.style.strokeDashoffset = offset;
+      ring.className = `score-ring-fill ${sample.category}`;
+      
+      // Animate score number
+      animateNumber('score-number', 0, sample.score, 800);
+      
+      await sleep(400);
+      
+      // Update category and reason
+      document.getElementById('score-category').textContent = sample.category.toUpperCase() + ' LEAD';
+      document.getElementById('score-category').className = `score-category ${sample.category}`;
+      document.getElementById('score-reason').textContent = sample.reason;
+      
+      // Render signals with animation
+      const signalsList = document.getElementById('signals-list');
+      signalsList.innerHTML = '';
+      
+      for (let i = 0; i < sample.signals.length; i++) {
+        await sleep(150);
+        const signal = sample.signals[i];
+        signalsList.innerHTML += `
+          <div class="signal-item" style="animation: fadeIn 0.3s ease">
+            <div class="signal-icon ${signal.type}">${signal.icon}</div>
+            <div class="signal-content">
+              <div class="signal-name">${signal.name}</div>
+              <div class="signal-detail">${signal.detail}</div>
+            </div>
+            <span class="signal-weight ${signal.type}">${signal.weight}</span>
+          </div>
+        `;
+      }
+      
+      document.getElementById('export-lead-btn').disabled = false;
+      document.getElementById('ls-status-text').textContent = 'Complete';
+      document.getElementById('ls-status').className = 'status-badge ready';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Analyze Lead';
+    }
+
+    // ========================
+    // Quote Generator Functions
+    // ========================
+    function selectQuoteSample(index, el) {
+      currentQuoteSample = index;
+      document.querySelectorAll('#quote-gen .sample-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      resetQuoteGeneration();
+    }
+
+    function randomQuoteSample() {
+      const index = Math.floor(Math.random() * quoteSamples.length);
+      const card = document.querySelectorAll('#quote-gen .sample-card')[index];
+      selectQuoteSample(index, card);
+    }
+
+    function resetQuoteGeneration() {
+      const fields = ['service', 'location', 'size', 'timeline', 'customer', 'requirements'];
+      fields.forEach(field => {
+        document.getElementById(`ext-${field}`).classList.remove('extracted');
+        document.getElementById(`ext-${field}-value`).textContent = 'Awaiting analysis...';
+        document.getElementById(`ext-${field}-value`).className = 'extraction-value pending';
+      });
+      
+      document.getElementById('quote-number').textContent = '---';
+      document.getElementById('quote-customer-name').textContent = '---';
+      document.getElementById('quote-line-items').innerHTML = `
+        <div class="quote-line">
+          <span class="quote-line-desc">Awaiting extraction...</span>
+          <span class="quote-line-price">---</span>
+        </div>
+      `;
+      document.getElementById('quote-total').textContent = '$---';
+      document.getElementById('export-quote-btn').disabled = true;
+      document.getElementById('qg-status-text').textContent = 'Ready';
+    }
+
+    async function generateQuote() {
+      const btn = document.getElementById('generate-quote-btn');
+      btn.disabled = true;
+      btn.innerHTML = '⟳ Extracting...';
+      document.getElementById('qg-status-text').textContent = 'Extracting...';
+      document.getElementById('qg-status').className = 'status-badge processing';
+      
+      const sample = quoteSamples[currentQuoteSample];
+      const fields = ['service', 'location', 'size', 'timeline', 'customer', 'requirements'];
+      const values = [sample.service, sample.location, sample.size, sample.timeline, sample.customer, sample.requirements];
+      
+      // Extract each field with animation
+      for (let i = 0; i < fields.length; i++) {
+        await sleep(300);
+        const el = document.getElementById(`ext-${fields[i]}`);
+        const valueEl = document.getElementById(`ext-${fields[i]}-value`);
+        
+        el.classList.add('extracted');
+        valueEl.textContent = values[i];
+        valueEl.className = 'extraction-value';
+        
+        // Add confidence
+        const confidenceEl = document.createElement('div');
+        confidenceEl.className = 'extraction-confidence';
+        confidenceEl.textContent = `✓ ${85 + Math.floor(Math.random() * 15)}% confidence`;
+        if (!el.querySelector('.extraction-confidence')) {
+          el.querySelector('.extraction-content').appendChild(confidenceEl);
+        }
+      }
+      
+      await sleep(400);
+      btn.innerHTML = '⟳ Generating...';
+      document.getElementById('qg-status-text').textContent = 'Generating...';
+      
+      await sleep(600);
+      
+      // Generate quote
+      document.getElementById('quote-number').textContent = 'Q-' + Date.now().toString().slice(-6);
+      document.getElementById('quote-customer-name').textContent = sample.customer;
+      
+      document.getElementById('quote-line-items').innerHTML = sample.lineItems.map(item => `
+        <div class="quote-line">
+          <span class="quote-line-desc">${item.desc}</span>
+          <span class="quote-line-price">$${item.price.toLocaleString()}</span>
+        </div>
+      `).join('');
+      
+      document.getElementById('quote-total').textContent = '$' + sample.total.toLocaleString();
+      
+      document.getElementById('export-quote-btn').disabled = false;
+      document.getElementById('qg-status-text').textContent = 'Complete';
+      document.getElementById('qg-status').className = 'status-badge ready';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Generate Quote';
+    }
+
+    // ========================
+    // Opportunity Detector Functions
+    // ========================
+    function renderLostLeads() {
+      const container = document.getElementById('leads-table-body');
+      container.innerHTML = lostLeads.map((lead, i) => `
+        <div class="leads-table-row" onclick="selectLostLead(${i}, this)">
+          <span class="lead-name">${lead.name}</span>
+          <span class="lead-service">${lead.service}</span>
+          <span class="lead-value">${lead.value}</span>
+          <span class="lead-sentiment">
+            <div class="sentiment-bar">
+              <div class="sentiment-fill ${lead.sentimentType}" style="width: ${lead.sentiment}%"></div>
+            </div>
+          </span>
+          <span class="lead-reason">${lead.reason}</span>
+        </div>
+      `).join('');
+    }
+
+    function selectLostLead(index, el) {
+      selectedLead = index;
+      document.querySelectorAll('.leads-table-row').forEach(r => r.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function loadMoreLeads() {
+      const newLeads = [
+        { name: 'Kevin Park', service: 'Solar', value: '$26,500', sentiment: 50, sentimentType: 'neutral', reason: 'Competitor' },
+        { name: 'Rachel Kim', service: 'HVAC', value: '$11,000', sentiment: 20, sentimentType: 'negative', reason: 'No Response' }
+      ];
+      lostLeads.push(...newLeads);
+      renderLostLeads();
+    }
+
+    async function analyzePatterns() {
+      const btn = document.getElementById('analyze-patterns-btn');
+      btn.disabled = true;
+      btn.innerHTML = '⟳ Analyzing...';
+      document.getElementById('op-status-text').textContent = 'Analyzing...';
+      document.getElementById('op-status').className = 'status-badge processing';
+      
+      await sleep(1000);
+      
+      // Calculate patterns
+      const noResponseCount = lostLeads.filter(l => l.reason === 'No Response').length;
+      const priceCount = lostLeads.filter(l => l.reason === 'Price').length;
+      const unansweredCount = lostLeads.filter(l => l.reason === 'Unanswered Q' || l.reason === 'Timeline').length;
+      
+      animateNumber('pattern-response', 0, noResponseCount, 600);
+      await sleep(200);
+      animateNumber('pattern-price', 0, priceCount, 600);
+      await sleep(200);
+      animateNumber('pattern-questions', 0, unansweredCount, 600);
+      
+      await sleep(500);
+      
+      // Show analysis panel
+      const panel = document.getElementById('analysis-panel');
+      panel.style.display = 'block';
+      
+      const totalValue = lostLeads.reduce((sum, l) => sum + parseInt(l.value.replace(/[$,]/g, '')), 0);
+      const noResponseValue = lostLeads.filter(l => l.reason === 'No Response')
+        .reduce((sum, l) => sum + parseInt(l.value.replace(/[$,]/g, '')), 0);
+      
+      document.getElementById('analysis-content').innerHTML = `
+        Based on analysis of <span class="analysis-highlight">${lostLeads.length} lost leads</span> worth 
+        <span class="analysis-highlight">$${totalValue.toLocaleString()}</span> in potential revenue:
+        <br><br>
+        <strong>Key Finding:</strong> Response time is your biggest conversion blocker. 
+        <span class="analysis-highlight">${noResponseCount} leads (${Math.round(noResponseCount/lostLeads.length*100)}%)</span> 
+        were lost due to slow or no follow-up, representing 
+        <span class="analysis-highlight">$${noResponseValue.toLocaleString()}</span> in lost revenue.
+        <br><br>
+        Sentiment analysis shows negative drop-off correlates strongly with response delays over 4 hours.
+      `;
+      
+      document.getElementById('rec-text').textContent = 
+        'Implement automated follow-up within 15 minutes of initial contact. Based on industry data, this could recover up to 35% of currently lost leads. Consider adding SMS notifications and automated appointment scheduling to reduce response friction.';
+      
+      document.getElementById('export-report-btn').disabled = false;
+      document.getElementById('op-status-text').textContent = 'Complete';
+      document.getElementById('op-status').className = 'status-badge ready';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Analyze Patterns';
+    }
+
+    // ========================
+    // Utility Functions
+    // ========================
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function animateNumber(elementId, start, end, duration) {
+      const el = document.getElementById(elementId);
+      const range = end - start;
+      const startTime = performance.now();
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + range * eased);
+        el.textContent = current;
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      
+      requestAnimationFrame(update);
+    }
+
+    // ========================
+    // Initialize
+    // ========================
+    window.addEventListener('load', () => {
+      renderTranscript(leadSamples[0]);
+      renderLostLeads();
+    });
+  </script>
+</body>
+</html>
